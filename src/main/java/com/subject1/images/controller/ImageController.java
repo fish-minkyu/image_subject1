@@ -38,4 +38,10 @@ public class ImageController {
         imageService.uploadImg(multipartFiles, projectId);
         return Boolean.TRUE;
     }
+
+    @DeleteMapping("/images/{id}")
+    public Boolean deleteImg(@PathVariable("id") Long imageId) {
+        imageService.softDeleteImg(imageId);
+        return Boolean.TRUE;
+    }
 }

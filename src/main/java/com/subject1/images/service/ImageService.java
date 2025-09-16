@@ -91,4 +91,13 @@ public class ImageService {
             }
         }
     }
+
+    @Transactional
+    public void softDeleteImg(Long imageId) {
+        Image image = imageRepository.findById(imageId)
+            .orElseThrow(() -> new IllegalArgumentException("Image not found"));
+
+        image.setSoftDelete(Boolean.TRUE);
+        imageRepository.save(image);
+    }
 }

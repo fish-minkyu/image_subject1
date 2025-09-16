@@ -45,7 +45,7 @@ public class Image {
     private String hashValue;
 
     // 소프트 삭제 여부
-    private Boolean isDeleted;
+    private Boolean softDelete;
 
     @Column(nullable = false)
     @CreationTimestamp

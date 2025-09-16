@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:sqlite:db.sqlite
+    driver-class-name: org.sqlite.JDBC
+    username: sqlite
+    password: password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    show-sql: true
+
+minio:
+  url: ${MINIO_URL} #minio 주소
+  path: ${MINIO_PATH}
+  dir:
+    image: ${MINIO_IMAGE_DIR} #버킷 내 이미지 저장할 폴더 명
+  bucket:
+    name: ${MINIO_BUCKET}  #버킷 이름
+  access:
+    name: ${MINIO_ACCESS_KEY}  #3에서 발급한 access key
+    secret: ${MINIO_SECRET_KEY} #3에서 발급한 secretKey key

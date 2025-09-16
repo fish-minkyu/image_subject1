@@ -12,12 +12,12 @@ spring:
     show-sql: true
 
 minio:
-  url: ${MINIO_URL} #minio 주소
+  url: http://localhost:4380 # minio API 포트 주소
   path: ${MINIO_PATH}
   dir:
-    image: ${MINIO_IMAGE_DIR} #버킷 내 이미지 저장할 폴더 명
+    image: storedImage # 버킷 내 이미지 저장할 폴더명
   bucket:
-    name: ${MINIO_BUCKET}  #버킷 이름
+    name: test  # 버킷 이름
   access:
-    name: ${MINIO_ACCESS_KEY}  #3에서 발급한 access key
-    secret: ${MINIO_SECRET_KEY} #3에서 발급한 secretKey key
+    name: CfwrngOx2FNR73LOrckh  # access key
+    secret: GMrt121O1yCb5AkZn8h2mn8byByDwKLlHAuEqdv4 # secretKey key

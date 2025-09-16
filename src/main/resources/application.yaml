@@ -17,7 +17,10 @@ minio:
   dir:
     image: storedImage # 버킷 내 이미지 저장할 폴더명
   bucket:
-    name: test  # 버킷 이름
+    image:
+      name: test # 이미지 저장 버킷 이름
+    thumbnail:
+      name: thumbnail # 썸네일 저장 버킷 이름
   access:
     name: CfwrngOx2FNR73LOrckh  # access key
     secret: GMrt121O1yCb5AkZn8h2mn8byByDwKLlHAuEqdv4 # secretKey key

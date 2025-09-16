@@ -26,10 +26,12 @@ import java.util.UUID;
 public class ImageService {
     private final ImageRepository imageRepository;
     private final MinioService minioService;
+    private final ThumbnailService thumbnailService;
 
-    public ImageService(ImageRepository imageRepository, MinioService minioService) {
+    public ImageService(ImageRepository imageRepository, MinioService minioService, ThumbnailService thumbnailService) {
         this.imageRepository = imageRepository;
         this.minioService = minioService;
+        this.thumbnailService = thumbnailService;
     }
 
     @Value("${minio.url}")
@@ -46,7 +48,6 @@ public class ImageService {
             InvalidResponseException,
             XmlParserException,
             InternalException {
-
         for (MultipartFile multipartFile : multipartFiles) {
             // 1. 이미지 파일의 해시 값 계산
             String fileHash;
@@ -79,8 +80,11 @@ public class ImageService {
 
                 // 5. DB에 image의 메타 데이터 저장한다.
                 imageRepository.save(newImage);
-            } catch (IOException ioException) {
-                throw new IOException(ioException.getMessage());
+
+                // 6. 비동기로 썸네일 생성 트리거
+                thumbnailService.generateThumbnail(newImage.getImageId());
+            } catch (IOException e) {
+                throw new IOException(e.getMessage());
             } catch (Exception e) {
                 log.error("Exception err: {}", e.getMessage());
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "uploadImg Method");

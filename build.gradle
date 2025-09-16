@@ -40,8 +40,14 @@ dependencies {
     annotationProcessor "jakarta.annotation:jakarta.annotation-api"
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
-    //minio
+    // minio
     implementation 'io.minio:minio:8.5.9'
+
+    // Spring Retry
+    implementation 'org.springframework.retry:spring-retry:1.3.4'
+
+    // Thumbnailator
+    implementation 'net.coobird:thumbnailator:0.4.14'
 
     // test
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

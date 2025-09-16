@@ -2,6 +2,8 @@ package com.subject1.images.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -15,6 +17,10 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imageId;
+
+    // 프로젝트 ID, 목록 조회를 할 때 필요하다.
+    @Column(nullable = false)
+    private Long projectId;
 
     // 파일명
     @Column(nullable = false)
@@ -42,8 +48,10 @@ public class Image {
     private Boolean isDeleted;
 
     @Column(nullable = false)
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
     // 썸네일 상태 enum

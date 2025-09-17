@@ -1,5 +1,6 @@
 package com.subject1.images.service;
 
+import com.subject1.images.dto.ImageCursorPageDto;
 import com.subject1.images.entity.Image;
 import com.subject1.images.repo.ImageRepository;
 import com.subject1.images.util.HashGenerator;
@@ -102,8 +103,21 @@ public class ImageService {
     }
 
     // 이미지 목록 조회(Cursor)
-    public void getListImgListCursor() {
+    public ImageCursorPageDto getListImgListCursor(Long projectId, Long lastImageId, int pageSize) {
+        List<Image> images = imageRepository.searchListCursor(projectId, lastImageId, pageSize);
 
+        // 가져온 데이터가 pageSize보다 많으면 다음 페이지가 존재한다.
+        boolean hasNext = images.size() > pageSize;
+
+        List<Image> currentPageImages = hasNext ? images.subList(0, pageSize) : images;
+
+        Long nextcursorId = null;
+        if (hasNext && !currentPageImages.isEmpty()) {
+            // 현재 페이지 마지막 이미지 ID
+            nextcursorId = currentPageImages.get(currentPageImages.size() -1).getImageId();
+        }
+
+        return new ImageCursorPageDto(currentPageImages, nextcursorId, hasNext);
     }
 
     // 이미지 수정

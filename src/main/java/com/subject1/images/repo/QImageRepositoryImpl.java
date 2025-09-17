@@ -1,5 +1,6 @@
 package com.subject1.images.repo;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.subject1.images.entity.Image;
@@ -41,4 +42,29 @@ public class QImageRepositoryImpl implements QImageRepository {
         return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchOne);
     }
 
+    @Override
+    public List<Image> searchListCursor(Long projectId, Long lastImageId, int pageSize) {
+
+        BooleanBuilder builder = new BooleanBuilder();
+
+        builder.and(image.softDelete.isNull()
+            .or(image.softDelete.eq(Boolean.FALSE)));
+
+        if (projectId != null) {
+            builder.and(image.projectId.eq(projectId));
+        }
+
+        // Cursor 조건 추가: lastImageId보다 더 큰 이미지들
+        // lastImageId가 null이면 첫 페이지이다.
+        if (lastImageId != null) {
+            builder.and(image.imageId.gt(lastImageId));
+        }
+
+        return queryFactory
+            .selectFrom(image)
+            .where(builder)
+            .orderBy(image.imageId.asc())
+            .limit(pageSize + 1)
+            .fetch();
+    }
 }

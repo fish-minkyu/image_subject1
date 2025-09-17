@@ -24,7 +24,9 @@ public class QImageRepositoryImpl implements QImageRepository {
     public Page<Image> searchListOffset(Long projectId, Pageable pageable) {
         List<Image> content = queryFactory
                 .selectFrom(image)
-                .where(image.softDelete.isNull()
+                .where(
+                    image.projectId.eq(projectId)
+                    , image.softDelete.isNull()
                     .or(image.softDelete.eq(Boolean.FALSE))
                 )
                 .orderBy(image.imageId.asc())

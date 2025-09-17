@@ -101,6 +101,11 @@ public class ImageService {
         return imageRepository.searchListOffset(projectId, pageable);
     }
 
+    // 이미지 목록 조회(Cursor)
+    public void getListImgListCursor() {
+
+    }
+
     // 이미지 수정
     public Image patchImg(Long imageId, String tag, String memo) {
         Image image = imageRepository.findById(imageId)

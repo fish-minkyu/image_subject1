@@ -8,6 +8,7 @@ import com.subject1.images.util.HashGenerator;
 import com.subject1.images.util.ImageAlreadyExistsException;
 import io.micrometer.common.util.StringUtils;
 import io.minio.errors.*;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -99,12 +100,16 @@ public class ImageService {
     }
 
     // 이미지 목록 조회(Offset)
+    @Cacheable(value = "imageListOffset", key = "{#searchParam, #pageable}")
     public Page<Image> getListImgListOffset(SearchParam searchParam, Pageable pageable) {
+        System.out.println("...: DB에서 데이터 조회 중...");
         return imageRepository.searchListOffset(searchParam, pageable);
     }
 
     // 이미지 목록 조회(Cursor)
+    @Cacheable(value = "imageListCursor", key = "{#searchParam, #pageSize}")
     public ImageCursorPageDto getListImgListCursor(SearchParam searchParam, int pageSize) {
+        System.out.println("...: DB에서 데이터 조회 중...");
         List<Image> images = imageRepository.searchListCursor(searchParam, pageSize);
 
         // 가져온 데이터가 pageSize보다 많으면 다음 페이지가 존재한다.

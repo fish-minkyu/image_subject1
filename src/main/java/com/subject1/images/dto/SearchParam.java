@@ -1,8 +1,12 @@
 package com.subject1.images.dto;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@EqualsAndHashCode
+@ToString
 public class SearchParam {
     private Long projectId;
     private String tag;

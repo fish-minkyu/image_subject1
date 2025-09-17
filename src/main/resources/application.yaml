@@ -11,9 +11,20 @@ spring:
     database-platform: org.hibernate.community.dialect.SQLiteDialect
     show-sql: true
 
+  data:
+    redis:
+      host: redis-10393.c340.ap-northeast-2-1.ec2.redns.redis-cloud.com
+      port: 10393
+      username: default
+      password: 7Sbh5h8oaIBZPtKaGtwEipQXDemf4JgC
+
+  logging:
+    level:
+      org.springframework.cache: DEBUG
+      org.springframework.data.redis: DEBUG
+
 minio:
   url: http://localhost:4380 # minio API 포트 주소
-  path: ${MINIO_PATH}
   dir:
     image: storedImage # 버킷 내 이미지 저장할 폴더명
   bucket:

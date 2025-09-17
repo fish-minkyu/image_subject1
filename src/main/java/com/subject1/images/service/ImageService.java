@@ -6,6 +6,8 @@ import com.subject1.images.util.HashGenerator;
 import com.subject1.images.util.ImageAlreadyExistsException;
 import io.micrometer.common.util.StringUtils;
 import io.minio.errors.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -92,6 +94,11 @@ public class ImageService {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "uploadImg Method");
             }
         }
+    }
+
+    // 이미지 목록 조회(Offset)
+    public Page<Image> getListImgListOffset(Long projectId, Pageable pageable) {
+        return imageRepository.searchListOffset(projectId, pageable);
     }
 
     // 이미지 수정

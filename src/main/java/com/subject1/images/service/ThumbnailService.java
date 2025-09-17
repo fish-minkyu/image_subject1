@@ -64,7 +64,7 @@ public class ThumbnailService {
                 minioService.saveThumbnailFile(thumbnailFileName, thumbnailInputStream, thumbnailBytes.length);
 
                 // 썸네일 URL을 생성하고, DB 업데이트한다.
-                String thumbnailUrl = minio + storedFileName;
+                String thumbnailUrl = minio + "/" + storedFileName;
                 image.setThumbnailUrl(thumbnailUrl);
                 image.setThumbnailStatus(Image.ThumbnailStatus.READY);
                 imageRepository.save(image);

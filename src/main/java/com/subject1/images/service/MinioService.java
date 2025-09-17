@@ -30,9 +30,6 @@ public class MinioService {
     @Value("${minio.bucket.thumbnail.name}")
     private String THUMBNAIL_BUCKET_NAME;
 
-    @Value("${minio.dir.image}")
-    private String IMAGE_DIR;
-
     @Transactional
     public String saveImgFile(String storedFileName, MultipartFile multipartFile)
         throws IOException,
@@ -132,7 +129,7 @@ public class MinioService {
         return minioClient.getPresignedObjectUrl(
             GetPresignedObjectUrlArgs.builder()
                 .method(Method.GET) // GET 메서드로 접근 허용
-                .bucket(THUMBNAIL_BUCKET_NAME)
+                .bucket(IMAGE_BUCKET_NAME)
                 .object(storedFileName)
                 .expiry(3600, TimeUnit.SECONDS) // 유효기간 설정
                 .build());

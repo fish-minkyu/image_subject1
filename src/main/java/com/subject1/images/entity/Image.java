@@ -60,6 +60,9 @@ public class Image {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @Transient
+    private String presignedUrl;
+
     // 썸네일 상태 enum
     public enum ThumbnailStatus {
         NONE,

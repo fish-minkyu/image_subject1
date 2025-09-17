@@ -1,6 +1,7 @@
 package com.subject1.images.controller;
 
 import com.subject1.images.dto.ImageCursorPageDto;
+import com.subject1.images.dto.SearchParam;
 import com.subject1.images.entity.Image;
 import com.subject1.images.service.ImageService;
 import io.minio.errors.*;
@@ -19,7 +20,6 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@RequestMapping("/projects")
 public class ImageController {
     private final ImageService imageService;
 
@@ -28,7 +28,7 @@ public class ImageController {
     }
 
     // 이미지 업로드 API
-    @PostMapping("/{projectId}/images")
+    @PostMapping("/projects/{projectId}/images")
     public Boolean uploadImg(
         @RequestParam("files") List<MultipartFile> multipartFiles,
         @PathVariable("projectId") Long projectId
@@ -47,25 +47,40 @@ public class ImageController {
     }
 
     // 이미지 목록 조회 API
-    @GetMapping("/{projectId}/images")
+    @GetMapping("/projects/{projectId}/images")
     public ResponseEntity<?> getListImg(
         @PathVariable Long projectId,
-        @RequestParam(required = false) Long lastImageId,
+        @ModelAttribute SearchParam searchParam,
         @PageableDefault(size = 10) Pageable pageable) {
         // Offset 방식
-//        Page<Image> offsetPage = imageService.getListImgListOffset(projectId, pageable);
+//        Page<Image> offsetPage = imageService.getListImgListOffset(searchParam, pageable);
 //        return ResponseEntity.ok(offsetPage);
 
         // Cursor 방식
         int pageSize = pageable.getPageSize() > 0 ? pageable.getPageSize() : 10;
-        ImageCursorPageDto cursorPage = imageService.getListImgListCursor(projectId, lastImageId, pageSize);
+        ImageCursorPageDto cursorPage = imageService.getListImgListCursor(searchParam, pageSize);
         return ResponseEntity.ok(cursorPage);
+    }
+
+    // 이미지 단건 조회
+    @GetMapping("/images/{id}")
+    public Image getImage(@PathVariable("id") Long imageId)
+        throws ServerException,
+        InsufficientDataException,
+        ErrorResponseException,
+        IOException,
+        NoSuchAlgorithmException,
+        InvalidKeyException,
+        InvalidResponseException,
+        XmlParserException,
+        InternalException {
+        return imageService.getImage(imageId);
     }
 
     // 이미지 수정 API
     @PatchMapping("/images/{id}")
-    public Image patchImg(@PathVariable("id") Long imageId, String tag, String memo) {
-        return imageService.patchImg(imageId, tag, memo);
+    public void patchImg(@PathVariable("id") Long imageId, String tag, String memo) {
+        imageService.patchImg(imageId, tag, memo);
     }
 
     // 이미지 삭제 API

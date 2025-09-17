@@ -3,6 +3,7 @@ package com.subject1.images.repo;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.subject1.images.dto.SearchParam;
 import com.subject1.images.entity.Image;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -22,14 +23,13 @@ public class QImageRepositoryImpl implements QImageRepository {
     }
 
     @Override
-    public Page<Image> searchListOffset(Long projectId, Pageable pageable) {
+    public Page<Image> searchListOffset(SearchParam searchParam, Pageable pageable) {
+
+        BooleanBuilder builder = basicWhere(searchParam.getProjectId());
+
         List<Image> content = queryFactory
                 .selectFrom(image)
-                .where(
-                    image.projectId.eq(projectId)
-                    , image.softDelete.isNull()
-                    .or(image.softDelete.eq(Boolean.FALSE))
-                )
+                .where(builder)
                 .orderBy(image.imageId.asc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -43,19 +43,13 @@ public class QImageRepositoryImpl implements QImageRepository {
     }
 
     @Override
-    public List<Image> searchListCursor(Long projectId, Long lastImageId, int pageSize) {
+    public List<Image> searchListCursor(SearchParam searchParam, int pageSize) {
 
-        BooleanBuilder builder = new BooleanBuilder();
-
-        builder.and(image.softDelete.isNull()
-            .or(image.softDelete.eq(Boolean.FALSE)));
-
-        if (projectId != null) {
-            builder.and(image.projectId.eq(projectId));
-        }
+        BooleanBuilder builder = basicWhere(searchParam.getProjectId());
 
         // Cursor 조건 추가: lastImageId보다 더 큰 이미지들
         // lastImageId가 null이면 첫 페이지이다.
+        Long lastImageId = searchParam.getLastImageId();
         if (lastImageId != null) {
             builder.and(image.imageId.gt(lastImageId));
         }
@@ -66,5 +60,18 @@ public class QImageRepositoryImpl implements QImageRepository {
             .orderBy(image.imageId.asc())
             .limit(pageSize + 1)
             .fetch();
+    }
+
+    private BooleanBuilder basicWhere(Long projectId) {
+        BooleanBuilder builder = new BooleanBuilder();
+
+        builder.and(image.softDelete.isNull()
+            .or(image.softDelete.eq(Boolean.FALSE)));
+
+        if (projectId != null) {
+            builder.and(image.projectId.eq(projectId));
+        }
+
+        return builder;
     }
 }

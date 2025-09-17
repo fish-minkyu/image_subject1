@@ -1,6 +1,7 @@
 package com.subject1.images.service;
 
 import com.subject1.images.dto.ImageCursorPageDto;
+import com.subject1.images.dto.SearchParam;
 import com.subject1.images.entity.Image;
 import com.subject1.images.repo.ImageRepository;
 import com.subject1.images.util.HashGenerator;
@@ -73,7 +74,7 @@ public class ImageService {
                 // MinIO에 해당 파일을 저장한다.
                 minioService.saveImgFile(storedFileName, multipartFile);
 
-                String minioUrl = minio + storedFileName;
+                String minioUrl = minio + "/" + storedFileName;
 
                 Image newImage = Image.builder()
                     .projectId(projectId)
@@ -98,13 +99,13 @@ public class ImageService {
     }
 
     // 이미지 목록 조회(Offset)
-    public Page<Image> getListImgListOffset(Long projectId, Pageable pageable) {
-        return imageRepository.searchListOffset(projectId, pageable);
+    public Page<Image> getListImgListOffset(SearchParam searchParam, Pageable pageable) {
+        return imageRepository.searchListOffset(searchParam, pageable);
     }
 
     // 이미지 목록 조회(Cursor)
-    public ImageCursorPageDto getListImgListCursor(Long projectId, Long lastImageId, int pageSize) {
-        List<Image> images = imageRepository.searchListCursor(projectId, lastImageId, pageSize);
+    public ImageCursorPageDto getListImgListCursor(SearchParam searchParam, int pageSize) {
+        List<Image> images = imageRepository.searchListCursor(searchParam, pageSize);
 
         // 가져온 데이터가 pageSize보다 많으면 다음 페이지가 존재한다.
         boolean hasNext = images.size() > pageSize;
@@ -120,15 +121,35 @@ public class ImageService {
         return new ImageCursorPageDto(currentPageImages, nextcursorId, hasNext);
     }
 
+    // 이미지 단건 조회
+    public Image getImage(Long imageId)
+        throws ServerException,
+        InsufficientDataException,
+        ErrorResponseException,
+        IOException,
+        NoSuchAlgorithmException,
+        InvalidKeyException,
+        InvalidResponseException,
+        XmlParserException,
+        InternalException {
+        Image image = imageRepository.findById(imageId)
+            .orElseThrow(() -> new IllegalArgumentException("Image not found"));
+
+        // Presigned URL 세팅
+        image.setPresignedUrl(minioService.getPresignedUrl(image.getStoredFileName()));
+        return image;
+    }
+
     // 이미지 수정
-    public Image patchImg(Long imageId, String tag, String memo) {
+    public void patchImg(Long imageId, String tag, String memo) {
         Image image = imageRepository.findById(imageId)
             .orElseThrow(() -> new IllegalArgumentException("Image not found"));
 
         if (StringUtils.isNotBlank(tag)) image.setTag(tag);
         if (StringUtils.isNotBlank(memo)) image.setMemo(memo);
 
-        return imageRepository.save(image);
+        // DB에 수정
+        imageRepository.save(image);
     }
 
     // 이미지 삭제

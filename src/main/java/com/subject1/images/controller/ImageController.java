@@ -1,5 +1,6 @@
 package com.subject1.images.controller;
 
+import com.subject1.images.entity.Image;
 import com.subject1.images.service.ImageService;
 import io.minio.errors.*;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +38,11 @@ public class ImageController {
             InternalException {
         imageService.uploadImg(multipartFiles, projectId);
         return Boolean.TRUE;
+    }
+
+    @PatchMapping("/images/{id}")
+    public Image patchImg(@PathVariable("id") Long imageId, String tag, String memo) {
+        return imageService.patchImg(imageId, tag, memo);
     }
 
     @DeleteMapping("/images/{id}")

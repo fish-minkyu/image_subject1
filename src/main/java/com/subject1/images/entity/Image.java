@@ -31,7 +31,13 @@ public class Image {
     private String storedFileName;
 
     // 원본 이미지가 MinIO에 저장된 URL
-    private String fileUrl;
+    private String bucketFileUrl;
+
+    // 메모
+    private String memo;
+
+    // 태그
+    private String tag;
 
     // 썸네일 이미지가 MinIO에 저장된 경로
     private String thumbnailUrl;

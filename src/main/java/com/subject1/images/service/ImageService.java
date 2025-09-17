@@ -4,6 +4,7 @@ import com.subject1.images.entity.Image;
 import com.subject1.images.repo.ImageRepository;
 import com.subject1.images.util.HashGenerator;
 import com.subject1.images.util.ImageAlreadyExistsException;
+import io.micrometer.common.util.StringUtils;
 import io.minio.errors.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +38,7 @@ public class ImageService {
     @Value("${minio.url}")
     private String minio;
 
+    // 이미지 업로드
     @Transactional
     public void uploadImg(List<MultipartFile> multipartFiles, Long projectId)
         throws IOException,
@@ -74,7 +76,7 @@ public class ImageService {
                     .projectId(projectId)
                     .fileName(multipartFile.getOriginalFilename())
                     .storedFileName(storedFileName)
-                    .fileUrl(minioUrl)
+                    .bucketFileUrl(minioUrl)
                     .hashValue(fileHash)
                     .build();
 
@@ -92,7 +94,18 @@ public class ImageService {
         }
     }
 
-    @Transactional
+    // 이미지 수정
+    public Image patchImg(Long imageId, String tag, String memo) {
+        Image image = imageRepository.findById(imageId)
+            .orElseThrow(() -> new IllegalArgumentException("Image not found"));
+
+        if (StringUtils.isNotBlank(tag)) image.setTag(tag);
+        if (StringUtils.isNotBlank(memo)) image.setMemo(memo);
+
+        return imageRepository.save(image);
+    }
+
+    // 이미지 삭제
     public void softDeleteImg(Long imageId) {
         Image image = imageRepository.findById(imageId)
             .orElseThrow(() -> new IllegalArgumentException("Image not found"));

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -16,7 +17,7 @@ public class ImageCursorPageDto {
     private boolean hasNext;
 
     public ImageCursorPageDto(List<Image> images, Long nextCursorId, boolean hasNext) {
-        this.images = images;
+        this.images = new ArrayList<>(images); // Jackson이 역직렬화할 때 문제 발생 방지
         this.nextCursorId = nextCursorId;
         this.hasNext = hasNext;
     }

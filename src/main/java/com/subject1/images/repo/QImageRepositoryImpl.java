@@ -6,10 +6,12 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.subject1.images.dto.SearchParam;
 import com.subject1.images.entity.Image;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 
+import java.util.Optional;
 import java.util.List;
 
 import static com.subject1.images.entity.QImage.image;
@@ -25,9 +27,14 @@ public class QImageRepositoryImpl implements QImageRepository {
     @Override
     public Page<Image> searchListOffset(Long projectId, SearchParam searchParam, Pageable pageable) {
 
-        BooleanBuilder builder = basicWhere(projectId,
+        String thumbnailStatusName = Optional.ofNullable(searchParam.getThumbnailStatus())
+            .map(Image.ThumbnailStatus::name)
+            .orElse(null);
+
+        BooleanBuilder builder = basicWhere(
+            projectId,
             searchParam.getTag(),
-            searchParam.getThumbnailStatus().name()
+            thumbnailStatusName
         );
 
         List<Image> content = queryFactory
@@ -49,9 +56,14 @@ public class QImageRepositoryImpl implements QImageRepository {
     @Override
     public List<Image> searchListCursor(Long projectId, SearchParam searchParam, int pageSize) {
 
-        BooleanBuilder builder = basicWhere(projectId,
+        String thumbnailStatusName = Optional.ofNullable(searchParam.getThumbnailStatus())
+            .map(Image.ThumbnailStatus::name)
+            .orElse(null);
+
+        BooleanBuilder builder = basicWhere(
+            projectId,
             searchParam.getTag(),
-            searchParam.getThumbnailStatus().name()
+            thumbnailStatusName
         );
 
         // Cursor 조건 추가: lastImageId보다 더 큰 이미지들
@@ -75,11 +87,14 @@ public class QImageRepositoryImpl implements QImageRepository {
         builder.and(image.softDelete.isNull()
             .or(image.softDelete.eq(Boolean.FALSE)));
 
-        builder.and(image.tag.eq(tag));
-        builder.and(image.thumbnailStatus.eq(Image.ThumbnailStatus.valueOf(status)));
-
         if (projectId != null) {
             builder.and(image.projectId.eq(projectId));
+        }
+        if (StringUtils.isNotBlank(tag)) {
+            builder.and(image.tag.eq(tag));
+        }
+        if (StringUtils.isNotBlank(status)) {
+            builder.and(image.thumbnailStatus.eq(Image.ThumbnailStatus.valueOf(status)));
         }
 
         return builder;

@@ -29,7 +29,7 @@ minio:
     image: storedImage # 버킷 내 이미지 저장할 폴더명
   bucket:
     image:
-      name: test # 이미지 저장 버킷 이름
+      name: image # 이미지 저장 버킷 이름
     thumbnail:
       name: thumbnail # 썸네일 저장 버킷 이름
   access:

@@ -25,7 +25,10 @@ public class QImageRepositoryImpl implements QImageRepository {
     @Override
     public Page<Image> searchListOffset(Long projectId, SearchParam searchParam, Pageable pageable) {
 
-        BooleanBuilder builder = basicWhere(projectId);
+        BooleanBuilder builder = basicWhere(projectId,
+            searchParam.getTag(),
+            searchParam.getThumbnailStatus().name()
+        );
 
         List<Image> content = queryFactory
                 .selectFrom(image)
@@ -46,7 +49,10 @@ public class QImageRepositoryImpl implements QImageRepository {
     @Override
     public List<Image> searchListCursor(Long projectId, SearchParam searchParam, int pageSize) {
 
-        BooleanBuilder builder = basicWhere(projectId);
+        BooleanBuilder builder = basicWhere(projectId,
+            searchParam.getTag(),
+            searchParam.getThumbnailStatus().name()
+        );
 
         // Cursor 조건 추가: lastImageId보다 더 큰 이미지들
         // lastImageId가 null이면 첫 페이지이다.
@@ -63,11 +69,14 @@ public class QImageRepositoryImpl implements QImageRepository {
             .fetch();
     }
 
-    private BooleanBuilder basicWhere(Long projectId) {
+    private BooleanBuilder basicWhere(Long projectId, String tag, String status) {
         BooleanBuilder builder = new BooleanBuilder();
 
         builder.and(image.softDelete.isNull()
             .or(image.softDelete.eq(Boolean.FALSE)));
+
+        builder.and(image.tag.eq(tag));
+        builder.and(image.thumbnailStatus.eq(status));
 
         if (projectId != null) {
             builder.and(image.projectId.eq(projectId));

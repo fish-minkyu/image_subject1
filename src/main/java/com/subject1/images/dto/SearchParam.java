@@ -1,5 +1,6 @@
 package com.subject1.images.dto;
 
+import com.subject1.images.entity.Image;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -9,6 +10,6 @@ import lombok.ToString;
 @ToString
 public class SearchParam {
     private String tag;
+    private Image.ThumbnailStatus thumbnailStatus;
     private Long lastImageId;
-    // 추후 상태 필드 추가 필요
 }

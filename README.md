@@ -100,6 +100,8 @@ docker run --user root -d --name minio -e "MINIO_ROOT_USER=tester" -e "MINIO_ROO
 ### API 명세서 링크 (Postman)
 https://lunar-meadow-994802-7901.postman.co/workspace/My-Workspace~c69748bb-1997-44ae-8afd-c39a5a82815b/collection/28378931-0360c126-6ac7-41e1-8c0f-44fc82ed1cdd
 
+### Postman 문서
+[postman_document](subject1_image_eominkyu.json)
 
 ### 성능 테스트 스크립트 및 실행방법
 [READTEST.md](READTEST.md)

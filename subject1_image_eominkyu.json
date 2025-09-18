@@ -1,0 +1,528 @@
+{
+	"info": {
+		"_postman_id": "0360c126-6ac7-41e1-8c0f-44fc82ed1cdd",
+		"name": "[바운드포]Subject1_Image",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28378931",
+		"_collection_link": "https://subject1images.postman.co/workspace/c69748bb-1997-44ae-8afd-c39a5a82815b/collection/28378931-0360c126-6ac7-41e1-8c0f-44fc82ed1cdd?action=share&source=collection_link&creator=28378931"
+	},
+	"item": [
+		{
+			"name": "이미지 업로드",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "files",
+							"type": "file",
+							"src": "/Users/eomingyu/Desktop/postman.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/projects/1/images",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"projects",
+						"1",
+						"images"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "이미지 업로드",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": "/Users/eomingyu/Desktop/postman.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/projects/1/images",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projects",
+								"1",
+								"images"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Sep 2025 15:45:11 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "true"
+				}
+			]
+		},
+		{
+			"name": "이미지 목록 조회(Offset)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "localhost:8080/projects/1/images?page=0",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"projects",
+						"1",
+						"images"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "이미지 목록 조회(Offset)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/projects/1/images?page=0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projects",
+								"1",
+								"images"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Sep 2025 15:45:44 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"content\": [\n        {\n            \"imageId\": 10001,\n            \"projectId\": 1,\n            \"fileName\": \"offset_result.png\",\n            \"storedFileName\": \"3ae7bd3b-4770-45e3-986a-393861d16c6d_offset_result.png\",\n            \"bucketFileUrl\": \"http://localhost:4380/3ae7bd3b-4770-45e3-986a-393861d16c6d_offset_result.png\",\n            \"memo\": null,\n            \"tag\": null,\n            \"thumbnailUrl\": \"http://localhost:4380/3ae7bd3b-4770-45e3-986a-393861d16c6d_offset_result.png\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"130c152e24cdfc3796b25a05833da42eee282f8a05e62dfb79317e589d6f4857\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:51:33.518\",\n            \"updatedAt\": \"2025-09-18T22:51:33.702\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 10002,\n            \"projectId\": 1,\n            \"fileName\": \"cursor_result.png\",\n            \"storedFileName\": \"a61625c8-be56-4f28-a9df-f2290882aa3f_cursor_result.png\",\n            \"bucketFileUrl\": \"http://localhost:4380/a61625c8-be56-4f28-a9df-f2290882aa3f_cursor_result.png\",\n            \"memo\": null,\n            \"tag\": null,\n            \"thumbnailUrl\": \"http://localhost:4380/a61625c8-be56-4f28-a9df-f2290882aa3f_cursor_result.png\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"99c2f630217e9c6b8448a9a94a97f4f257c1a5c26de73a6ee0e5432b2f2d7299\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T23:07:04.631\",\n            \"updatedAt\": \"2025-09-18T23:07:04.684\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 10003,\n            \"projectId\": 1,\n            \"fileName\": \"gray.png\",\n            \"storedFileName\": \"1e3535c6-f44a-439d-a2aa-d8e95951a668_gray.png\",\n            \"bucketFileUrl\": \"http://localhost:4380/1e3535c6-f44a-439d-a2aa-d8e95951a668_gray.png\",\n            \"memo\": null,\n            \"tag\": null,\n            \"thumbnailUrl\": \"http://localhost:4380/1e3535c6-f44a-439d-a2aa-d8e95951a668_gray.png\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"99ff6bcea989b0f50de46f147748d679f2a2e55d3dfb111cc4552f4290e2587b\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T23:28:59.9\",\n            \"updatedAt\": \"2025-09-18T23:28:59.992\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 10004,\n            \"projectId\": 1,\n            \"fileName\": \"postman.png\",\n            \"storedFileName\": \"c00f53ab-ed90-4a57-8ecd-93c586c56c19_postman.png\",\n            \"bucketFileUrl\": \"http://localhost:4380/c00f53ab-ed90-4a57-8ecd-93c586c56c19_postman.png\",\n            \"memo\": null,\n            \"tag\": null,\n            \"thumbnailUrl\": \"http://localhost:4380/c00f53ab-ed90-4a57-8ecd-93c586c56c19_postman.png\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"3d4e21d00ea01066ba32b7c1a6e359c9d4de804cf2d3b0fab1435823a9c7046a\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-19T00:45:11.968\",\n            \"updatedAt\": \"2025-09-19T00:45:12.129\",\n            \"presignedUrl\": null\n        }\n    ],\n    \"number\": 0,\n    \"size\": 10,\n    \"totalElements\": 4,\n    \"last\": true,\n    \"totalPages\": 1,\n    \"first\": true,\n    \"sort\": {\n        \"empty\": true,\n        \"sorted\": false,\n        \"unsorted\": true\n    },\n    \"numberOfElements\": 4,\n    \"empty\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "이미지 목록 조회(Cursor)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/projects/1/images?lastImageId=0",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"projects",
+						"1",
+						"images"
+					],
+					"query": [
+						{
+							"key": "lastImageId",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "이미지 목록 조회(Cursor)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/projects/1/images?lastImageId=0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projects",
+								"1",
+								"images"
+							],
+							"query": [
+								{
+									"key": "lastImageId",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Sep 2025 15:47:56 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"images\": [\n        {\n            \"imageId\": 10001,\n            \"projectId\": 1,\n            \"fileName\": \"offset_result.png\",\n            \"storedFileName\": \"3ae7bd3b-4770-45e3-986a-393861d16c6d_offset_result.png\",\n            \"bucketFileUrl\": \"http://localhost:4380/3ae7bd3b-4770-45e3-986a-393861d16c6d_offset_result.png\",\n            \"memo\": null,\n            \"tag\": null,\n            \"thumbnailUrl\": \"http://localhost:4380/3ae7bd3b-4770-45e3-986a-393861d16c6d_offset_result.png\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"130c152e24cdfc3796b25a05833da42eee282f8a05e62dfb79317e589d6f4857\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:51:33.518\",\n            \"updatedAt\": \"2025-09-18T22:51:33.702\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 10002,\n            \"projectId\": 1,\n            \"fileName\": \"cursor_result.png\",\n            \"storedFileName\": \"a61625c8-be56-4f28-a9df-f2290882aa3f_cursor_result.png\",\n            \"bucketFileUrl\": \"http://localhost:4380/a61625c8-be56-4f28-a9df-f2290882aa3f_cursor_result.png\",\n            \"memo\": null,\n            \"tag\": null,\n            \"thumbnailUrl\": \"http://localhost:4380/a61625c8-be56-4f28-a9df-f2290882aa3f_cursor_result.png\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"99c2f630217e9c6b8448a9a94a97f4f257c1a5c26de73a6ee0e5432b2f2d7299\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T23:07:04.631\",\n            \"updatedAt\": \"2025-09-18T23:07:04.684\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 10003,\n            \"projectId\": 1,\n            \"fileName\": \"gray.png\",\n            \"storedFileName\": \"1e3535c6-f44a-439d-a2aa-d8e95951a668_gray.png\",\n            \"bucketFileUrl\": \"http://localhost:4380/1e3535c6-f44a-439d-a2aa-d8e95951a668_gray.png\",\n            \"memo\": null,\n            \"tag\": null,\n            \"thumbnailUrl\": \"http://localhost:4380/1e3535c6-f44a-439d-a2aa-d8e95951a668_gray.png\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"99ff6bcea989b0f50de46f147748d679f2a2e55d3dfb111cc4552f4290e2587b\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T23:28:59.9\",\n            \"updatedAt\": \"2025-09-18T23:28:59.992\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 10004,\n            \"projectId\": 1,\n            \"fileName\": \"postman.png\",\n            \"storedFileName\": \"c00f53ab-ed90-4a57-8ecd-93c586c56c19_postman.png\",\n            \"bucketFileUrl\": \"http://localhost:4380/c00f53ab-ed90-4a57-8ecd-93c586c56c19_postman.png\",\n            \"memo\": null,\n            \"tag\": null,\n            \"thumbnailUrl\": \"http://localhost:4380/c00f53ab-ed90-4a57-8ecd-93c586c56c19_postman.png\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"3d4e21d00ea01066ba32b7c1a6e359c9d4de804cf2d3b0fab1435823a9c7046a\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-19T00:45:11.968\",\n            \"updatedAt\": \"2025-09-19T00:45:12.129\",\n            \"presignedUrl\": null\n        }\n    ],\n    \"nextCursorId\": null,\n    \"hasNext\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "이미지 단건 조회",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/images/10001",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"images",
+						"10001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "이미지 수정",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tag",
+							"value": "tag",
+							"type": "text"
+						},
+						{
+							"key": "memo",
+							"value": "memo",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/images/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"images",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "이미지 삭제",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/images/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"images",
+						"1"
+					],
+					"query": [
+						{
+							"key": "tag",
+							"value": "tag",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "이미지 대량 데이터 목록 조회(Offset)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/projects/11/images?page=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"projects",
+						"11",
+						"images"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "이미지 대량 데이터 목록 조회(Offset)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/projects/11/images?page=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projects",
+								"11",
+								"images"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Sep 2025 14:39:32 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"content\": [\n        {\n            \"imageId\": 11,\n            \"projectId\": 11,\n            \"fileName\": \"odio_consequatur/et.html\",\n            \"storedFileName\": \"61e73f35-cc18-4764-839e-07aa4b190d54_odio_consequatur/et.html\",\n            \"bucketFileUrl\": \"http://localhost:4380/61e73f35-cc18-4764-839e-07aa4b190d54_odio_consequatur/et.html\",\n            \"memo\": \"Aut odit minima quia.\",\n            \"tag\": \"landscape\",\n            \"thumbnailUrl\": \"http://localhost:4380/bea4bba6-a75c-4d00-8289-e212fbecb5e6thumbnail_odio_consequatur/et.html\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"e4a0f8fe-d5b6-43c4-8ebb-3e51156357e1\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.512\",\n            \"updatedAt\": \"2025-09-18T22:12:14.512\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 12,\n            \"projectId\": 11,\n            \"fileName\": \"et_incidunt/similique.tiff\",\n            \"storedFileName\": \"c9a22ffc-2335-42c8-ae97-0d95cf5da45c_et_incidunt/similique.tiff\",\n            \"bucketFileUrl\": \"http://localhost:4380/c9a22ffc-2335-42c8-ae97-0d95cf5da45c_et_incidunt/similique.tiff\",\n            \"memo\": \"Rerum facilis officia corrupti pariatur et.\",\n            \"tag\": \"landscape\",\n            \"thumbnailUrl\": \"http://localhost:4380/a4365ad8-f450-466b-a50d-6737029888a1thumbnail_et_incidunt/similique.tiff\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"eb665dcb-34ba-4f5f-b447-015119a785f8\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.513\",\n            \"updatedAt\": \"2025-09-18T22:12:14.513\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 13,\n            \"projectId\": 11,\n            \"fileName\": \"nobis_numquam/quisquam.avi\",\n            \"storedFileName\": \"717cec01-cd86-40a4-9758-71ee076cb761_nobis_numquam/quisquam.avi\",\n            \"bucketFileUrl\": \"http://localhost:4380/717cec01-cd86-40a4-9758-71ee076cb761_nobis_numquam/quisquam.avi\",\n            \"memo\": \"Ex labore et quia.\",\n            \"tag\": \"animal\",\n            \"thumbnailUrl\": \"http://localhost:4380/2d88ed0e-50c8-4235-9a7d-397bdd2d3b4bthumbnail_nobis_numquam/quisquam.avi\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"ab3e42d6-b37f-497b-9811-9628a9e28112\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.514\",\n            \"updatedAt\": \"2025-09-18T22:12:14.514\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 14,\n            \"projectId\": 11,\n            \"fileName\": \"dicta_eligendi/unde.ppt\",\n            \"storedFileName\": \"95c40365-1afb-4de5-ac30-6853fbe73c0d_dicta_eligendi/unde.ppt\",\n            \"bucketFileUrl\": \"http://localhost:4380/95c40365-1afb-4de5-ac30-6853fbe73c0d_dicta_eligendi/unde.ppt\",\n            \"memo\": \"Ut cumque saepe.\",\n            \"tag\": \"nature\",\n            \"thumbnailUrl\": \"http://localhost:4380/4eb239f2-2e9f-457d-abca-3ccf9d6d68adthumbnail_dicta_eligendi/unde.ppt\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"51aa3b89-c764-48f9-bcb2-9ef40500007d\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.514\",\n            \"updatedAt\": \"2025-09-18T22:12:14.514\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 15,\n            \"projectId\": 11,\n            \"fileName\": \"deleniti_voluptatem/rerum.bmp\",\n            \"storedFileName\": \"12f4833e-6132-4b95-8c19-812419a017e1_deleniti_voluptatem/rerum.bmp\",\n            \"bucketFileUrl\": \"http://localhost:4380/12f4833e-6132-4b95-8c19-812419a017e1_deleniti_voluptatem/rerum.bmp\",\n            \"memo\": \"Non omnis exercitationem facilis enim nisi ut non.\",\n            \"tag\": \"portrait\",\n            \"thumbnailUrl\": \"http://localhost:4380/3057a5c4-0bc0-4c72-9bd4-fdf940c56377thumbnail_deleniti_voluptatem/rerum.bmp\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"08c3ccd0-9350-4772-8da8-2cc50970fe5f\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.515\",\n            \"updatedAt\": \"2025-09-18T22:12:14.515\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 16,\n            \"projectId\": 11,\n            \"fileName\": \"iste_nam/reprehenderit.webm\",\n            \"storedFileName\": \"d4188bfb-faf1-4037-9054-058e6661e4ab_iste_nam/reprehenderit.webm\",\n            \"bucketFileUrl\": \"http://localhost:4380/d4188bfb-faf1-4037-9054-058e6661e4ab_iste_nam/reprehenderit.webm\",\n            \"memo\": \"Nostrum dolor quam error mollitia autem.\",\n            \"tag\": \"animal\",\n            \"thumbnailUrl\": \"http://localhost:4380/4d5df146-e3dc-40b2-accc-885e73464535thumbnail_iste_nam/reprehenderit.webm\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"c2d1e37a-b0e7-464b-9468-4544af0d302d\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.516\",\n            \"updatedAt\": \"2025-09-18T22:12:14.516\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 17,\n            \"projectId\": 11,\n            \"fileName\": \"voluptas_rerum/dolorum.ppt\",\n            \"storedFileName\": \"287529a6-6486-4fb4-a41e-6680a193f672_voluptas_rerum/dolorum.ppt\",\n            \"bucketFileUrl\": \"http://localhost:4380/287529a6-6486-4fb4-a41e-6680a193f672_voluptas_rerum/dolorum.ppt\",\n            \"memo\": \"Neque ipsa debitis eum dicta facilis.\",\n            \"tag\": \"nature\",\n            \"thumbnailUrl\": \"http://localhost:4380/b48560ce-0ac3-433a-a91a-125d30e55f8dthumbnail_voluptas_rerum/dolorum.ppt\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"2087c0ec-99fb-4b65-b7de-1e4dcc0b2308\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.517\",\n            \"updatedAt\": \"2025-09-18T22:12:14.517\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 18,\n            \"projectId\": 11,\n            \"fileName\": \"culpa_ut/quod.wav\",\n            \"storedFileName\": \"c4afb938-db95-458c-beaa-fd405f723a96_culpa_ut/quod.wav\",\n            \"bucketFileUrl\": \"http://localhost:4380/c4afb938-db95-458c-beaa-fd405f723a96_culpa_ut/quod.wav\",\n            \"memo\": \"Totam minus impedit.\",\n            \"tag\": \"portrait\",\n            \"thumbnailUrl\": \"http://localhost:4380/0ba8b0e4-4c13-4c46-9406-ee8118198bc8thumbnail_culpa_ut/quod.wav\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"d908fadb-53cd-4143-b31e-b0de9324e1e3\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.518\",\n            \"updatedAt\": \"2025-09-18T22:12:14.518\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 19,\n            \"projectId\": 11,\n            \"fileName\": \"quod_ut/et.webm\",\n            \"storedFileName\": \"5e119dd5-c46f-4ef5-b2f4-5659d5b38410_quod_ut/et.webm\",\n            \"bucketFileUrl\": \"http://localhost:4380/5e119dd5-c46f-4ef5-b2f4-5659d5b38410_quod_ut/et.webm\",\n            \"memo\": \"Qui quo eos ex dolorem.\",\n            \"tag\": \"nature\",\n            \"thumbnailUrl\": \"http://localhost:4380/31f31ea1-892c-4008-9388-819dc7e79341thumbnail_quod_ut/et.webm\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"e7865b9e-2fde-4a2d-b918-597d7fed2675\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.519\",\n            \"updatedAt\": \"2025-09-18T22:12:14.519\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 20,\n            \"projectId\": 11,\n            \"fileName\": \"quis_at/in.odt\",\n            \"storedFileName\": \"6d94a1fb-be47-4d68-aa3f-eb0fd69f5eb4_quis_at/in.odt\",\n            \"bucketFileUrl\": \"http://localhost:4380/6d94a1fb-be47-4d68-aa3f-eb0fd69f5eb4_quis_at/in.odt\",\n            \"memo\": \"Provident non quia illo natus.\",\n            \"tag\": \"portrait\",\n            \"thumbnailUrl\": \"http://localhost:4380/85b8f7ea-79e1-4166-a847-4cf20f87e690thumbnail_quis_at/in.odt\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"dbd7478a-2e67-42db-a2b3-a54772e5cb47\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.52\",\n            \"updatedAt\": \"2025-09-18T22:12:14.52\",\n            \"presignedUrl\": null\n        }\n    ],\n    \"number\": 1,\n    \"size\": 10,\n    \"totalElements\": 10000,\n    \"last\": false,\n    \"totalPages\": 1000,\n    \"first\": false,\n    \"sort\": {\n        \"empty\": true,\n        \"sorted\": false,\n        \"unsorted\": true\n    },\n    \"numberOfElements\": 10,\n    \"empty\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "이미지 대량 데이터 목록 조회(Cursor)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/projects/11/images?lastImageId=10",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"projects",
+						"11",
+						"images"
+					],
+					"query": [
+						{
+							"key": "lastImageId",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "이미지 대량 데이터 목록 조회(Cursor)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/projects/11/images?lastImageId=10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projects",
+								"11",
+								"images"
+							],
+							"query": [
+								{
+									"key": "lastImageId",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Sep 2025 14:37:49 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"images\": [\n        {\n            \"imageId\": 11,\n            \"projectId\": 11,\n            \"fileName\": \"odio_consequatur/et.html\",\n            \"storedFileName\": \"61e73f35-cc18-4764-839e-07aa4b190d54_odio_consequatur/et.html\",\n            \"bucketFileUrl\": \"http://localhost:4380/61e73f35-cc18-4764-839e-07aa4b190d54_odio_consequatur/et.html\",\n            \"memo\": \"Aut odit minima quia.\",\n            \"tag\": \"landscape\",\n            \"thumbnailUrl\": \"http://localhost:4380/bea4bba6-a75c-4d00-8289-e212fbecb5e6thumbnail_odio_consequatur/et.html\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"e4a0f8fe-d5b6-43c4-8ebb-3e51156357e1\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.512\",\n            \"updatedAt\": \"2025-09-18T22:12:14.512\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 12,\n            \"projectId\": 11,\n            \"fileName\": \"et_incidunt/similique.tiff\",\n            \"storedFileName\": \"c9a22ffc-2335-42c8-ae97-0d95cf5da45c_et_incidunt/similique.tiff\",\n            \"bucketFileUrl\": \"http://localhost:4380/c9a22ffc-2335-42c8-ae97-0d95cf5da45c_et_incidunt/similique.tiff\",\n            \"memo\": \"Rerum facilis officia corrupti pariatur et.\",\n            \"tag\": \"landscape\",\n            \"thumbnailUrl\": \"http://localhost:4380/a4365ad8-f450-466b-a50d-6737029888a1thumbnail_et_incidunt/similique.tiff\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"eb665dcb-34ba-4f5f-b447-015119a785f8\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.513\",\n            \"updatedAt\": \"2025-09-18T22:12:14.513\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 13,\n            \"projectId\": 11,\n            \"fileName\": \"nobis_numquam/quisquam.avi\",\n            \"storedFileName\": \"717cec01-cd86-40a4-9758-71ee076cb761_nobis_numquam/quisquam.avi\",\n            \"bucketFileUrl\": \"http://localhost:4380/717cec01-cd86-40a4-9758-71ee076cb761_nobis_numquam/quisquam.avi\",\n            \"memo\": \"Ex labore et quia.\",\n            \"tag\": \"animal\",\n            \"thumbnailUrl\": \"http://localhost:4380/2d88ed0e-50c8-4235-9a7d-397bdd2d3b4bthumbnail_nobis_numquam/quisquam.avi\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"ab3e42d6-b37f-497b-9811-9628a9e28112\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.514\",\n            \"updatedAt\": \"2025-09-18T22:12:14.514\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 14,\n            \"projectId\": 11,\n            \"fileName\": \"dicta_eligendi/unde.ppt\",\n            \"storedFileName\": \"95c40365-1afb-4de5-ac30-6853fbe73c0d_dicta_eligendi/unde.ppt\",\n            \"bucketFileUrl\": \"http://localhost:4380/95c40365-1afb-4de5-ac30-6853fbe73c0d_dicta_eligendi/unde.ppt\",\n            \"memo\": \"Ut cumque saepe.\",\n            \"tag\": \"nature\",\n            \"thumbnailUrl\": \"http://localhost:4380/4eb239f2-2e9f-457d-abca-3ccf9d6d68adthumbnail_dicta_eligendi/unde.ppt\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"51aa3b89-c764-48f9-bcb2-9ef40500007d\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.514\",\n            \"updatedAt\": \"2025-09-18T22:12:14.514\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 15,\n            \"projectId\": 11,\n            \"fileName\": \"deleniti_voluptatem/rerum.bmp\",\n            \"storedFileName\": \"12f4833e-6132-4b95-8c19-812419a017e1_deleniti_voluptatem/rerum.bmp\",\n            \"bucketFileUrl\": \"http://localhost:4380/12f4833e-6132-4b95-8c19-812419a017e1_deleniti_voluptatem/rerum.bmp\",\n            \"memo\": \"Non omnis exercitationem facilis enim nisi ut non.\",\n            \"tag\": \"portrait\",\n            \"thumbnailUrl\": \"http://localhost:4380/3057a5c4-0bc0-4c72-9bd4-fdf940c56377thumbnail_deleniti_voluptatem/rerum.bmp\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"08c3ccd0-9350-4772-8da8-2cc50970fe5f\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.515\",\n            \"updatedAt\": \"2025-09-18T22:12:14.515\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 16,\n            \"projectId\": 11,\n            \"fileName\": \"iste_nam/reprehenderit.webm\",\n            \"storedFileName\": \"d4188bfb-faf1-4037-9054-058e6661e4ab_iste_nam/reprehenderit.webm\",\n            \"bucketFileUrl\": \"http://localhost:4380/d4188bfb-faf1-4037-9054-058e6661e4ab_iste_nam/reprehenderit.webm\",\n            \"memo\": \"Nostrum dolor quam error mollitia autem.\",\n            \"tag\": \"animal\",\n            \"thumbnailUrl\": \"http://localhost:4380/4d5df146-e3dc-40b2-accc-885e73464535thumbnail_iste_nam/reprehenderit.webm\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"c2d1e37a-b0e7-464b-9468-4544af0d302d\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.516\",\n            \"updatedAt\": \"2025-09-18T22:12:14.516\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 17,\n            \"projectId\": 11,\n            \"fileName\": \"voluptas_rerum/dolorum.ppt\",\n            \"storedFileName\": \"287529a6-6486-4fb4-a41e-6680a193f672_voluptas_rerum/dolorum.ppt\",\n            \"bucketFileUrl\": \"http://localhost:4380/287529a6-6486-4fb4-a41e-6680a193f672_voluptas_rerum/dolorum.ppt\",\n            \"memo\": \"Neque ipsa debitis eum dicta facilis.\",\n            \"tag\": \"nature\",\n            \"thumbnailUrl\": \"http://localhost:4380/b48560ce-0ac3-433a-a91a-125d30e55f8dthumbnail_voluptas_rerum/dolorum.ppt\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"2087c0ec-99fb-4b65-b7de-1e4dcc0b2308\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.517\",\n            \"updatedAt\": \"2025-09-18T22:12:14.517\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 18,\n            \"projectId\": 11,\n            \"fileName\": \"culpa_ut/quod.wav\",\n            \"storedFileName\": \"c4afb938-db95-458c-beaa-fd405f723a96_culpa_ut/quod.wav\",\n            \"bucketFileUrl\": \"http://localhost:4380/c4afb938-db95-458c-beaa-fd405f723a96_culpa_ut/quod.wav\",\n            \"memo\": \"Totam minus impedit.\",\n            \"tag\": \"portrait\",\n            \"thumbnailUrl\": \"http://localhost:4380/0ba8b0e4-4c13-4c46-9406-ee8118198bc8thumbnail_culpa_ut/quod.wav\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"d908fadb-53cd-4143-b31e-b0de9324e1e3\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.518\",\n            \"updatedAt\": \"2025-09-18T22:12:14.518\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 19,\n            \"projectId\": 11,\n            \"fileName\": \"quod_ut/et.webm\",\n            \"storedFileName\": \"5e119dd5-c46f-4ef5-b2f4-5659d5b38410_quod_ut/et.webm\",\n            \"bucketFileUrl\": \"http://localhost:4380/5e119dd5-c46f-4ef5-b2f4-5659d5b38410_quod_ut/et.webm\",\n            \"memo\": \"Qui quo eos ex dolorem.\",\n            \"tag\": \"nature\",\n            \"thumbnailUrl\": \"http://localhost:4380/31f31ea1-892c-4008-9388-819dc7e79341thumbnail_quod_ut/et.webm\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"e7865b9e-2fde-4a2d-b918-597d7fed2675\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.519\",\n            \"updatedAt\": \"2025-09-18T22:12:14.519\",\n            \"presignedUrl\": null\n        },\n        {\n            \"imageId\": 20,\n            \"projectId\": 11,\n            \"fileName\": \"quis_at/in.odt\",\n            \"storedFileName\": \"6d94a1fb-be47-4d68-aa3f-eb0fd69f5eb4_quis_at/in.odt\",\n            \"bucketFileUrl\": \"http://localhost:4380/6d94a1fb-be47-4d68-aa3f-eb0fd69f5eb4_quis_at/in.odt\",\n            \"memo\": \"Provident non quia illo natus.\",\n            \"tag\": \"portrait\",\n            \"thumbnailUrl\": \"http://localhost:4380/85b8f7ea-79e1-4166-a847-4cf20f87e690thumbnail_quis_at/in.odt\",\n            \"thumbnailStatus\": \"READY\",\n            \"hashValue\": \"dbd7478a-2e67-42db-a2b3-a54772e5cb47\",\n            \"softDelete\": null,\n            \"createdAt\": \"2025-09-18T22:12:14.52\",\n            \"updatedAt\": \"2025-09-18T22:12:14.52\",\n            \"presignedUrl\": null\n        }\n    ],\n    \"nextCursorId\": 20,\n    \"hasNext\": true\n}"
+				}
+			]
+		}
+	]
+}

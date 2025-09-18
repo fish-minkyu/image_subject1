@@ -1,5 +1,6 @@
 package com.subject1.images.service;
 
+import com.subject1.images.config.CustomPageImpl;
 import com.subject1.images.dto.ImageCursorPageDto;
 import com.subject1.images.dto.SearchParam;
 import com.subject1.images.entity.Image;
@@ -101,16 +102,17 @@ public class ImageService {
 
     // 이미지 목록 조회(Offset)
     @Cacheable(value = "imageListOffset", key = "{#searchParam, #pageable}")
-    public Page<Image> getListImgListOffset(SearchParam searchParam, Pageable pageable) {
+    public CustomPageImpl<Image> getListImgListOffset(Long projectId, SearchParam searchParam, Pageable pageable) {
         System.out.println("...: DB에서 데이터 조회 중...");
-        return imageRepository.searchListOffset(searchParam, pageable);
+        Page<Image> resultPage = imageRepository.searchListOffset(projectId, searchParam, pageable);
+        return new CustomPageImpl<>(resultPage);
     }
 
     // 이미지 목록 조회(Cursor)
     @Cacheable(value = "imageListCursor", key = "{#searchParam, #pageSize}")
-    public ImageCursorPageDto getListImgListCursor(SearchParam searchParam, int pageSize) {
+    public ImageCursorPageDto getListImgListCursor(Long projectId, SearchParam searchParam, int pageSize) {
         System.out.println("...: DB에서 데이터 조회 중...");
-        List<Image> images = imageRepository.searchListCursor(searchParam, pageSize);
+        List<Image> images = imageRepository.searchListCursor(projectId, searchParam, pageSize);
 
         // 가져온 데이터가 pageSize보다 많으면 다음 페이지가 존재한다.
         boolean hasNext = images.size() > pageSize;

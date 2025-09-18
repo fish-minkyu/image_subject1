@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface QImageRepository {
     // Offset 페이지네이션
-    Page<Image> searchListOffset(SearchParam searchParam, Pageable pageable);
+    public Page<Image> searchListOffset(Long projectId, SearchParam searchParam, Pageable pageable);
 
     // Cursor 페이지네이션
-    List<Image> searchListCursor(SearchParam searchParam, int pageSize);
+    List<Image> searchListCursor(Long projectId, SearchParam searchParam, int pageSize);
 }

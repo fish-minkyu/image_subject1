@@ -23,9 +23,9 @@ public class QImageRepositoryImpl implements QImageRepository {
     }
 
     @Override
-    public Page<Image> searchListOffset(SearchParam searchParam, Pageable pageable) {
+    public Page<Image> searchListOffset(Long projectId, SearchParam searchParam, Pageable pageable) {
 
-        BooleanBuilder builder = basicWhere(searchParam.getProjectId());
+        BooleanBuilder builder = basicWhere(projectId);
 
         List<Image> content = queryFactory
                 .selectFrom(image)
@@ -37,15 +37,16 @@ public class QImageRepositoryImpl implements QImageRepository {
 
         JPAQuery<Long> countQuery = queryFactory
             .select(image.count())
-            .from(image);
+            .from(image)
+            .where(builder);
 
         return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchOne);
     }
 
     @Override
-    public List<Image> searchListCursor(SearchParam searchParam, int pageSize) {
+    public List<Image> searchListCursor(Long projectId, SearchParam searchParam, int pageSize) {
 
-        BooleanBuilder builder = basicWhere(searchParam.getProjectId());
+        BooleanBuilder builder = basicWhere(projectId);
 
         // Cursor 조건 추가: lastImageId보다 더 큰 이미지들
         // lastImageId가 null이면 첫 페이지이다.

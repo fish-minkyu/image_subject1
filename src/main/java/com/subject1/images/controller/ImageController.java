@@ -1,12 +1,12 @@
 package com.subject1.images.controller;
 
+import com.subject1.images.config.CustomPageImpl;
 import com.subject1.images.dto.ImageCursorPageDto;
 import com.subject1.images.dto.SearchParam;
 import com.subject1.images.entity.Image;
 import com.subject1.images.service.ImageService;
 import io.minio.errors.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -53,13 +53,13 @@ public class ImageController {
         @ModelAttribute SearchParam searchParam,
         @PageableDefault(size = 10) Pageable pageable) {
         // Offset 방식
-//        Page<Image> offsetPage = imageService.getListImgListOffset(searchParam, pageable);
-//        return ResponseEntity.ok(offsetPage);
+        CustomPageImpl<Image> offsetPage = imageService.getListImgListOffset(projectId, searchParam, pageable);
+        return ResponseEntity.ok(offsetPage);
 
         // Cursor 방식
-        int pageSize = pageable.getPageSize() > 0 ? pageable.getPageSize() : 10;
-        ImageCursorPageDto cursorPage = imageService.getListImgListCursor(searchParam, pageSize);
-        return ResponseEntity.ok(cursorPage);
+//        int pageSize = pageable.getPageSize() > 0 ? pageable.getPageSize() : 10;
+//        ImageCursorPageDto cursorPage = imageService.getListImgListCursor(projectId, searchParam, pageSize);
+//        return ResponseEntity.ok(cursorPage);
     }
 
     // 이미지 단건 조회

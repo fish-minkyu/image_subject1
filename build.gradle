@@ -52,6 +52,9 @@ dependencies {
     // Thumbnailator
     implementation 'net.coobird:thumbnailator:0.4.14'
 
+    // datafaker
+    implementation 'net.datafaker:datafaker:2.0.2'
+
     // test
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

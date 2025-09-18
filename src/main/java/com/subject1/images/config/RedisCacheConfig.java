@@ -24,16 +24,20 @@ public class RedisCacheConfig {
     private static final String PACKAGE_PATH = "com.subject1";
     private static final String UTIL_ARRAYLIST = "java.util.ArrayList";
     private static final String PAGE_IMPL = "org.springframework.data.domain.PageImpl";
+    private static final String UNMODIFIABLE_RANDOM_ACCESS_LIST = "java.util.Collections$UnmodifiableRandomAccessList";
+
 
     @Bean
     public CacheManager redisCacheManager(
         RedisConnectionFactory redisConnectionFactory,
         ObjectMapper objectMapper
     ) {
+        ObjectMapper cacheObjectMapper = objectMapper.copy();
+
         // LocalDateTime 모듈 등록
-        objectMapper.registerModule(new JavaTimeModule());
+        cacheObjectMapper.registerModule(new JavaTimeModule());
         // WRITE_DATES_AS_TIMESTAMPS 비활성화 -> 날짜를 배열 대신 ISO-8601 문자열로 직렬화
-        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        cacheObjectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
         // Redis 직렬화&역직렬화 사용할 objectMapper 설정
         PolymorphicTypeValidator ptv = BasicPolymorphicTypeValidator
@@ -44,11 +48,13 @@ public class RedisCacheConfig {
             .allowIfSubType(UTIL_ARRAYLIST)
             // Page<Image> 캐싱 시 PageImpl도 허용
             .allowIfSubType(PAGE_IMPL)
+            // PageImpl 내부의 콘텐츠가 List로 직렬화될 때 사용될 수 있는 타입 허용
+            .allowIfSubType(UNMODIFIABLE_RANDOM_ACCESS_LIST)
             .build();
-        objectMapper.activateDefaultTyping(ptv, ObjectMapper.DefaultTyping.NON_FINAL);
+        cacheObjectMapper.activateDefaultTyping(ptv, ObjectMapper.DefaultTyping.NON_FINAL);
 
         GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer
-            = new GenericJackson2JsonRedisSerializer(objectMapper);
+            = new GenericJackson2JsonRedisSerializer(cacheObjectMapper); // 수정된 cacheObjectMapper 사용
 
         RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
             // 키는 String으로 직렬화

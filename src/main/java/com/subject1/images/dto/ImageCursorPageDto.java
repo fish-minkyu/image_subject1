@@ -2,12 +2,14 @@ package com.subject1.images.dto;
 
 import com.subject1.images.entity.Image;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class ImageCursorPageDto {
     private List<Image> images;
     private Long nextCursorId;

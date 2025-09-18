@@ -76,7 +76,7 @@ public class QImageRepositoryImpl implements QImageRepository {
             .or(image.softDelete.eq(Boolean.FALSE)));
 
         builder.and(image.tag.eq(tag));
-        builder.and(image.thumbnailStatus.eq(status));
+        builder.and(image.thumbnailStatus.eq(Image.ThumbnailStatus.valueOf(status)));
 
         if (projectId != null) {
             builder.and(image.projectId.eq(projectId));
